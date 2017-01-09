@@ -1,8 +1,11 @@
 #!/usr/bin/env node
 var app = require('../app');
+var cfenv = require('cfenv');
 
-app.set('port', process.env.PORT || 3002);
+// get the app environment from Cloud Foundry
+var appEnv = cfenv.getAppEnv();
+//app.set('port', process.env.PORT || 3002);
 
 var server = app.listen(app.get('port'), function() {
-  console.log('Express server listening on port ' + server.address().port);
+  console.log("server starting on " + appEnv.url);
 });
